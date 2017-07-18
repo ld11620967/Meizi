@@ -1,4 +1,4 @@
-package com.nilin.developgoods.model
+package com.nilin.meizi.model
 
 import com.kcode.gankotlin.repository.Article
 

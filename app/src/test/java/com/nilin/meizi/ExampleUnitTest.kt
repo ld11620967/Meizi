@@ -1,4 +1,4 @@
-package com.nilin.developgoods
+package com.nilin.meizi
 
 import org.junit.Test
 

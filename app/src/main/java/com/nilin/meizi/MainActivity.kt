@@ -1,13 +1,14 @@
-package com.nilin.developgoods
+package com.nilin.meizi
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SimpleItemAnimator
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.Toolbar
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kcode.gankotlin.repository.Article
-import com.nilin.developgoods.model.Result
+import com.nilin.meizi.model.Result
 import kotlinx.android.synthetic.main.activity_main.*
 import com.nilin.retrofit2_rxjava2_demo.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +18,7 @@ import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity() {
-    var adapter: ArticleAdapter? = null
+    var adapter: MeiziAdapter? = null
     val pageSize = 10
     var pageNumber = 1
     var isRefresh = false
@@ -29,14 +30,18 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        recyclerview.layoutManager = LinearLayoutManager(this)
-        adapter = ArticleAdapter(this,R.layout.item_news)
-        recyclerview.adapter = adapter
+        recyclerview.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        var simpleAnimator: SimpleItemAnimator = recyclerview.itemAnimator as SimpleItemAnimator
+        simpleAnimator.supportsChangeAnimations = false
 
+        adapter = MeiziAdapter(this,R.layout.item_girls)
+
+        recyclerview.adapter = adapter
         adapter!!.setOnLoadMoreListener({ loadMore() }, recyclerview)
         adapter!!.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
             adapter, view, position ->
             start2Detail(adapter.data[position] as Article)
+
         }
 
         fab.onClick {
@@ -48,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             isRefresh = true
             loadData(pageSize,pageNumber)
         })
-
         loadData(pageSize,pageNumber)
     }
 
@@ -65,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     protected fun loadData(pageSize: Int, pageNumber: Int) {
         val api = Api.Factory.create()
-        api.getData("Android",pageSize, pageNumber)
+        api.getData("福利",pageSize, pageNumber)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({

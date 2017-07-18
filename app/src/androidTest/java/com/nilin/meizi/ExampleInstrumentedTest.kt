@@ -1,4 +1,4 @@
-package com.nilin.developgoods
+package com.nilin.meizi
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
