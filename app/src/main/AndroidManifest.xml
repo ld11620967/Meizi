@@ -8,19 +8,18 @@
         android:allowBackup="false"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.nilin.meizi.MainActivity">
+        <activity android:name="com.nilin.meizi.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.nilin.meizi.DetailsActivity"
-            />
+        <activity android:name="com.nilin.meizi.DetailsActivity" />
+        <activity android:name="com.nilin.meizi.MainActivity" />
+        <activity android:name="com.nilin.meizi.AboutActivity" />
     </application>
 
 </manifest>

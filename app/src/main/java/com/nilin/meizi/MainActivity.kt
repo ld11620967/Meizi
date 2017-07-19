@@ -15,6 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
+import android.view.MenuItem
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +27,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val intent = Intent(this, AboutActivity::class.java)
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
+        toolbar.inflateMenu(R.menu.menu_main)
+        toolbar.setTitle("妹子瀑布流")
+        toolbar.setOnMenuItemClickListener(object : Toolbar.OnMenuItemClickListener {
+            override fun onMenuItemClick(item: MenuItem): Boolean {
+                when (item.getItemId()) {
+                    R.id.about -> {
+                        startActivity(intent)
+                        finish()
+                        return true
+                    }
+                }
+                return false
+            }
+        })
 
         recyclerview.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         var simpleAnimator: SimpleItemAnimator = recyclerview.itemAnimator as SimpleItemAnimator
